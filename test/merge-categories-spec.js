@@ -62,7 +62,7 @@ describe("mergeCategories()", () => {
   });
 
   context("using <option> tags", () => {
-    const list = `
+    const template = `
       <div>
         <select>
           <!-- Content here -->
@@ -70,16 +70,46 @@ describe("mergeCategories()", () => {
       </div>
     `;
 
-    it("should return no <option>s for no categories", () => {
-      expect.fail("please write this test");
+    it("should return no <option> for no categories", () => {
+      let catagories = [];
+      //act
+      let list = mergeCategories(template, catagories, "option");
+      //assert
+      expect(list).to.include("<div>");
+      expect(list).to.include("</div>");
+      expect(list).to.include("<select>");
+      expect(list).to.include("</select>");
+      expect(list).to.not.include("<option>");
+      expect(list).to.not.include("</option>");
+      expect(list).to.not.include("<!-- Content here -->");
     });
 
     it("should return a single <option> for one category", () => {
-      expect.fail("please write this test");
+      let catagories = ["dog"];
+      //act
+      let list = mergeCategories(template, catagories, "option");
+      //assert
+      expect(list).to.include("<div>");
+      expect(list).to.include("</div>");
+      expect(list).to.include("<select>");
+      expect(list).to.include("</select>");
+      expect(list).to.include("<option>dog</option>");
+      expect(list).to.not.include("<!-- Content here -->");
     });
 
     it("should return an <option> for each category", () => {
-      expect.fail("please write this test");
+      let catagories = ["dog", "cat", "mouse"];
+      //act
+      let list = mergeCategories(template, catagories, "option");
+      //assert
+      expect(list).to.include("<div>");
+      expect(list).to.include("</div>");
+      expect(list).to.include("<select>");
+      expect(list).to.include("</select>");
+      expect(list).to.include("<option>dog</option>");
+      expect(list).to.include("<option>cat</option>");
+      expect(list).to.include("<option>mouse</option>");
+      expect(list).to.not.include("<!-- Content here -->");
     });
   });
 });
