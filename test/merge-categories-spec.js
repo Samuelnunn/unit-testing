@@ -12,6 +12,19 @@ describe("mergeCategories()", () => {
     `;
 
     it("should return no <li>s for no categories", () => {
+    //arrange
+    let catagories = [];
+    //act
+    let list = mergeCategories(template, catagories, 'li')
+    //assert
+    expect(list).to.include("<div>");
+    expect(list).to.include("</div>");
+    expect(list).to.include("<ul>");
+    expect(list).to.include("</ul>");
+    expect(list).to.not.include("<li>");
+    expect(list).to.not.include("</li>");
+    expect(list).to.not.include("<!-- Content here -->");
+    
     });
 
     it("should return a single <li> for one category", () => {
@@ -24,7 +37,7 @@ describe("mergeCategories()", () => {
   });
 
   context("using <option> tags", () => {
-    const template = `
+    const list = `
       <div>
         <select>
           <!-- Content here -->
