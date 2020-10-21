@@ -46,5 +46,5 @@ describe("The getBodyFromRequest function", () => {
     });
   });
 });
-console
+consol
 ///
